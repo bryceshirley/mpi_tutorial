@@ -6,7 +6,7 @@ Teacher gathers grades back, then broadcasts results.
 
 Everyone knows all grades, but lots of data moved.
 
-Run: mpirun -np 4 python filename.py
+Run: mpirun -np 4 python grade_scatter_gather_bcast.py
 """
 from mpi4py import MPI
 from exam_helpers import generate_assignments, grade_assignment
@@ -20,11 +20,11 @@ size = comm.Get_size()
 if rank == 0:
     assignments = generate_assignments(size)
 else:
-    assigements = None
+    assignments = None
 
 # --- SCATTER: each rank gets one assignment ---
 my_assignment = comm.scatter(assignments, root=0)
-print(f"[Rank {rank}] received assignment id={my_assignment['id']} raw={my_assignment['raw']}")
+print(f"[Rank {rank}] received assignment id={my_assignment['id']} raw_score={my_assignment['raw_score']}")
 
 # --- Local grading ---
 my_grade = grade_assignment(my_assignment)

@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 4.
 Teacher scatters papers, students grade.
@@ -7,7 +8,7 @@ We only care about the total score → Allreduce(SUM).
 Everyone gets the result directly, no extra broadcast needed.
 
 (Efficient if only the total matters).
-Run: mpirun -np 4 python exam_scatter_allreduce.py
+Run: mpirun -np 4 python /home/dnz75396/mpi_example/grade_scatter_allreduce.py
 """
 from mpi4py import MPI
 from exam_helpers import generate_assignments, grade_assignment
@@ -25,7 +26,7 @@ else:
 
 # --- SCATTER: each rank gets one assignment ---
 my_assignment = comm.scatter(assignments, root=0)
-print(f"[Rank {rank}] received assignment id={my_assignment['id']} raw={my_assignment['raw']}")
+print(f"[Rank {rank}] received assignment id={my_assignment['id']} raw_score={my_assignment['raw_score']}")
 
 # --- Local grading ---
 my_grade = grade_assignment(my_assignment)

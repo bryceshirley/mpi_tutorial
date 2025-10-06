@@ -8,9 +8,6 @@ from mpi4py import MPI
 from exam_helpers import generate_assignments, grade_assignment
 
 
-# Explicitly initialize MPI (optional in mpi4py, but good for clarity)
-MPI.Init()
-
 # Get MPI info
 comm = MPI.COMM_WORLD # communicator
 rank = comm.Get_rank() # rank of this process
@@ -31,7 +28,7 @@ if rank == 0:
 else:
     # Wait for assignment from teacher
     my_assignment = comm.recv(source=0, tag=1)
-print(f"[Rank {rank}] received assignment id={my_assignment['id']} raw={my_assignment['raw']}")
+print(f"[Rank {rank}] received assignment id={my_assignment['id']} raw_score={my_assignment['raw_score']}")
 
 
 
