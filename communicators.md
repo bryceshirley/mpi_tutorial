@@ -1,5 +1,5 @@
 # MPI MODEL: 
-**Single Program, Multiple Data.**
+**Single Program, Multiple Data.** - each process runs the same code but on different chunks of data.
 
 # Communication Types
 

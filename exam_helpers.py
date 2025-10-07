@@ -11,6 +11,7 @@ def generate_assignments(num_assignment):
 
 def grade_assignment(assignment):
     """Grade assignment.
+    Return grade 1-3 based on raw_score.
     """
     # Simulate marking time (varies per paper)
     time.sleep(0.05 * (1 + assignment["id"] * 0.2))
