@@ -14,6 +14,13 @@ comm = MPI.COMM_WORLD # communicator
 rank = comm.Get_rank() # rank of this process
 size = comm.Get_size()  # total number of processes
 
+# Show MPI vendor info: mpi4py acts as a wrapper for different MPI implementations and
+# will use whatever MPI is installed on the system.
+if rank == 0:
+    print(f"MPI vendor and version: {MPI.get_vendor()}\n", flush=True)
+
+# Sync all ranks before timing/printing
+comm.Barrier()
 
 if rank == 0:
     # Lecturer (root) prepares dictionary of "assignment"s
@@ -62,6 +69,8 @@ if rank == 0:
     print(f"\n[Rank {rank} Lecturer] Final per-assignment grades:")
     for grade_info in all_grades:
         print(f"  assignment {grade_info['id']}: {grade_info['grade']}")
+    
+    print(f"Not efficient for large classes due to many messages sent to/from Lecturer.\n Try Collective communication methods instead.")
 
 
 # Explicitly finalize MPI (optional in mpi4py, but good for clarity)
