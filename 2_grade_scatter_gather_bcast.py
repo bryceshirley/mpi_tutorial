@@ -1,12 +1,12 @@
 """
 2. Scatter + Gather + Broadcast
-Teacher scatters papers, students grade.
+Lecturer scatters papers, students grade.
 
-Teacher gathers grades back, then broadcasts results.
+Lecturer gathers grades back, then broadcasts results.
 
 Everyone knows all grades, but lots of data moved.
 
-Run: mpirun -np 4 python grade_scatter_gather_bcast.py
+Run: mpirun -np 4 python 2_grade_scatter_gather_bcast.py
 """
 from mpi4py import MPI
 from exam_helpers import generate_assignments, grade_assignment
@@ -18,7 +18,7 @@ size = comm.Get_size()
 
 
 if rank == 0:
-    # Teacher (root) prepares dictionary of "assignment"s
+    # Lecturer (root) prepares dictionary of "assignment"s
     assignments = generate_assignments(size)
 else:
     assignments = None

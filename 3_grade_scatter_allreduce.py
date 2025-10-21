@@ -1,13 +1,13 @@
 """
 3.
-Teacher scatters papers, students grade.
+Lecturer scatters papers, students grade.
 
 We only care about the total score → Allreduce(SUM).
 
 Everyone gets the result directly, no extra broadcast needed.
 
 (Efficient if only the total matters).
-Run: mpirun -np 8 python grade_scatter_allreduce.py
+Run: mpirun -np 8 python 3_grade_scatter_allreduce.py
 """
 from mpi4py import MPI
 from exam_helpers import generate_assignments, grade_assignment
@@ -18,7 +18,7 @@ rank = comm.Get_rank()
 size = comm.Get_size()
 
 if rank == 0:
-    # Teacher (root) prepares dictionary of "assignment"s
+    # Lecturer (root) prepares dictionary of "assignment"s
     assignments = generate_assignments(size)
 else:
     assignments = None
